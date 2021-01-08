@@ -4,24 +4,23 @@ import java.util.Map;
 
 public class Article extends Dto {
 	private String updateDate;
+	private int cateItemId;
 	private String title;
 	private String body;
 
-	public Article() {
-
-	}
-
 	public Article(Map<String, Object> row) {
 		super(row);
+
 		this.updateDate = (String) row.get("updateDate");
+		this.cateItemId = (int) row.get("cateItemId");
 		this.title = (String) row.get("title");
 		this.body = (String) row.get("body");
 	}
 
 	@Override
 	public String toString() {
-		return "Article [id=" + getId() + ", regDate=" + getRegDate() + ", updateDate=" + updateDate + ", title="
-				+ title + ", body=" + body + "]";
+		return "Article [updateDate=" + updateDate + ", cateItemId=" + cateItemId + ", title=" + title + ", body="
+				+ body + ", getId()=" + getId() + ", getRegDate()=" + getRegDate() + "]";
 	}
 
 	public String getUpdateDate() {
@@ -30,6 +29,14 @@ public class Article extends Dto {
 
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
+	}
+
+	public int getCateItemId() {
+		return cateItemId;
+	}
+
+	public void setCateItemId(int cateItemId) {
+		this.cateItemId = cateItemId;
 	}
 
 	public String getTitle() {
