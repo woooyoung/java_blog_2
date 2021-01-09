@@ -36,7 +36,7 @@ public class ArticleDetailServlet extends HttpServlet {
 		// DB 접속 시작
 		String url = "jdbc:mysql://site41.iu.gy:3306/site41?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
 		String user = "site41";
-		String password = "ghfkddl1!!";
+		String password = "sbs123414";
 
 		try (Connection connection = DriverManager.getConnection(url, user, password)) {
 			// DB 접속 성공
