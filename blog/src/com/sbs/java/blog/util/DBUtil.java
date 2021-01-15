@@ -11,19 +11,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.sbs.java.blog.exception.SQLErrorException;
 
 public class DBUtil {
-	private HttpServletRequest req;
-	private HttpServletResponse resp;
-
-	public DBUtil(HttpServletRequest req, HttpServletResponse resp) {
-		this.req = req;
-		this.resp = resp;
-	}
-
-	public Map<String, Object> selectRow(Connection dbConn, String sql) {
+	public static Map<String, Object> selectRow(Connection dbConn, String sql) {
 		List<Map<String, Object>> rows = selectRows(dbConn, sql);
 
 		if (rows.size() == 0) {
@@ -33,7 +24,7 @@ public class DBUtil {
 		return rows.get(0);
 	}
 
-	public List<Map<String, Object>> selectRows(Connection dbConn, String sql) {
+	public static List<Map<String, Object>> selectRows(Connection dbConn, String sql) throws SQLErrorException {
 		List<Map<String, Object>> rows = new ArrayList<>();
 
 		Statement stmt = null;
@@ -67,21 +58,21 @@ public class DBUtil {
 				rows.add(row);
 			}
 		} catch (SQLException e) {
-			Util.printEx("SQL 예외, SQL : " + sql, resp, e);
+			throw new SQLErrorException("SQL 예외, SQL : " + sql);
 		} finally {
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					Util.printEx("SQL 예외, stmt 닫기", resp, e);
-				}
-			}
-
 			if (rs != null) {
 				try {
 					rs.close();
 				} catch (SQLException e) {
-					Util.printEx("SQL 예외, rs 닫기", resp, e);
+					throw new SQLErrorException("SQL 예외, rs 닫기" + sql);
+				}
+			}
+
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					throw new SQLErrorException("SQL 예외, stmt 닫기" + sql);
 				}
 			}
 		}
@@ -89,7 +80,7 @@ public class DBUtil {
 		return rows;
 	}
 
-	public int selectRowIntValue(Connection dbConn, String sql) {
+	public static int selectRowIntValue(Connection dbConn, String sql) {
 		Map<String, Object> row = selectRow(dbConn, sql);
 
 		for (String key : row.keySet()) {
@@ -99,7 +90,7 @@ public class DBUtil {
 		return -1;
 	}
 
-	public String selectRowStringValue(Connection dbConn, String sql) {
+	public static String selectRowStringValue(Connection dbConn, String sql) {
 		Map<String, Object> row = selectRow(dbConn, sql);
 
 		for (String key : row.keySet()) {
@@ -109,7 +100,7 @@ public class DBUtil {
 		return "";
 	}
 
-	public boolean selectRowBooleanValue(Connection dbConn, String sql) {
+	public static boolean selectRowBooleanValue(Connection dbConn, String sql) {
 		Map<String, Object> row = selectRow(dbConn, sql);
 
 		for (String key : row.keySet()) {
