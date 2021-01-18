@@ -14,6 +14,7 @@ import com.sbs.java.blog.controller.Controller;
 import com.sbs.java.blog.controller.HomeController;
 import com.sbs.java.blog.controller.MemberController;
 import com.sbs.java.blog.controller.TestController;
+import com.sbs.java.blog.exception.SQLErrorException;
 import com.sbs.java.blog.util.Util;
 
 public class App {
@@ -57,11 +58,13 @@ public class App {
 		try {
 			// DB 접속 성공
 			dbConn = DriverManager.getConnection(url, user, password);
-
 			// 올바른 컨트롤러로 라우팅
 			route(dbConn, req, resp);
 		} catch (SQLException e) {
 			Util.printEx("SQL 예외(커넥션 열기)", resp, e);
+		} catch (SQLErrorException e) {
+			Util.printEx(e.getMessage(), resp, e);
+			Util.printEx(e.getMessage(), resp, e.getOrigin());
 		} catch (Exception e) {
 			Util.printEx("기타 예외", resp, e);
 		} finally {
