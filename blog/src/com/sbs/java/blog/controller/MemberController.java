@@ -6,8 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sbs.java.blog.service.MemberService;
-
 public class MemberController extends Controller {
 
 	public MemberController(Connection dbConn, String actionMethodName, HttpServletRequest req,
@@ -25,6 +23,8 @@ public class MemberController extends Controller {
 			return doActionLogin();
 		case "doLogin":
 			return doActionDoLogin();
+		case "doActionDoLogout":
+			return doActionDoLogout();
 		}
 
 		return "";
@@ -48,6 +48,12 @@ public class MemberController extends Controller {
 
 	private String doActionLogin() {
 		return "member/login.jsp";
+	}
+
+	private String doActionDoLogout() {
+		session.removeAttribute("loginedMemberId");
+
+		return String.format("html:<script> alert('로그아웃 되었습니다.'); location.replace('../home/main'); </script>");
 	}
 
 	private String doActionDoJoin() {
