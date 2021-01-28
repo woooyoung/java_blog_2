@@ -79,6 +79,22 @@ boolean isLogined = (boolean) request.getAttribute("isLogined");
 	<div class="mobile-side-bar flex flex-ai-c visible-on-sm-down">
 		<nav class="menu-box-1 flex-grow-1">
 			<ul>
+				<%
+					if (isLogined) {
+				%>
+				<li><a
+					href="${pageContext.request.contextPath}/s/member/doLogout"
+					class="block">Logout</a></li>
+				<%
+					} else {
+				%>
+				<li><a href="${pageContext.request.contextPath}/s/member/login"
+					class="block">Login</a></li>
+				<li><a href="${pageContext.request.contextPath}/s/member/join"
+					class="block">Join</a></li>
+				<%
+					}
+				%>
 				<li><a href="${pageContext.request.contextPath}/s/home/main"
 					class="block">Home</a></li>
 				<li><a

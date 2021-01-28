@@ -66,4 +66,12 @@ updateDate = NOW(),
 `name` = 'admin',
 `nickname` = 'admin',
 `email` = 'admin@admin.com',
-`level` = 10; 
+`level` = 10;
+
+# 게시물에 memberId 칼럼 추가
+ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER cateItemId;
+
+# 기존 게시물의 작성자 번호를 1번으로 정리(통일)
+UPDATE article
+SET memberId = 1
+WHERE memberId = 0; 
