@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sbs.java.blog.util.Util;
+
 public class MemberController extends Controller {
 
 	public MemberController(Connection dbConn, String actionMethodName, HttpServletRequest req,
@@ -43,7 +45,9 @@ public class MemberController extends Controller {
 		HttpSession session = req.getSession();
 		session.setAttribute("loginedMemberId", loginedMemberId);
 
-		return String.format("html:<script> alert('로그인 되었습니다.'); location.replace('../home/main'); </script>");
+		String redirectUrl = Util.getString(req, "redirectUrl", "../home/main");
+
+		return String.format("html:<script> alert('로그인 되었습니다.'); location.replace('" + redirectUrl + "'); </script>");
 	}
 
 	private String doActionLogin() {

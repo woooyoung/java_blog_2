@@ -1,7 +1,8 @@
 package com.sbs.java.blog.util;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -71,5 +72,25 @@ public class Util {
 
 	public static String getString(HttpServletRequest req, String paramName) {
 		return req.getParameter(paramName);
+	}
+
+	public static String getUrlEncoded(String str) {
+		try {
+			return URLEncoder.encode(str, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			return str;
+		}
+	}
+
+	public static String getString(HttpServletRequest req, String paramName, String elseValue) {
+		if (req.getParameter(paramName) == null) {
+			return elseValue;
+		}
+
+		if (req.getParameter(paramName).trim().length() == 0) {
+			return elseValue;
+		}
+
+		return getString(req, paramName);
 	}
 }
