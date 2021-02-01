@@ -127,4 +127,11 @@ public class ArticleDao extends Dao {
 
 		return DBUtil.update(dbConn, sql);
 	}
+
+	public int deleteArticle(int id) {
+		SecSql sql = SecSql.from("DELETE FROM article");
+		sql.append("WHERE id = ?", id);
+
+		return DBUtil.delete(dbConn, sql);
+	}
 }
