@@ -114,8 +114,7 @@ public class ArticleDao extends Dao {
 		sql.append(", body = ? ", body);
 		sql.append(", displayStatus = '1'");
 		sql.append(", cateItemId = ?", cateItemId);
-
-		sql.append(",memberID = ?", memberId);
+		sql.append(", memberId = ?", memberId);
 
 		return DBUtil.insert(dbConn, sql);
 	}
@@ -133,5 +132,18 @@ public class ArticleDao extends Dao {
 		sql.append("WHERE id = ?", id);
 
 		return DBUtil.delete(dbConn, sql);
+	}
+
+	public int modifyArticle(int id, int cateItemId, String title, String body) {
+		SecSql sql = new SecSql();
+
+		sql.append("UPDATE article");
+		sql.append("SET updateDate = NOW()");
+		sql.append(", title = ? ", title);
+		sql.append(", body = ? ", body);
+		sql.append(", cateItemId = ?", cateItemId);
+		sql.append("WHERE id = ?", id);
+
+		return DBUtil.update(dbConn, sql);
 	}
 }

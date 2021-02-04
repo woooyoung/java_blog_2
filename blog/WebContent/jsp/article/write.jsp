@@ -3,13 +3,16 @@
 <%@ include file="/jsp/part/head.jspf"%>
 <%@ include file="/jsp/part/toastUiEditor.jspf"%>
 
-
 <style>
 /* cus */
 .write-form-box {
 	margin-top: 30px;
 }
 </style>
+
+<div class="con">
+	<h1>게시물 작성</h1>
+</div>
 
 <script>
 	var submitWriteFormDone = false;
@@ -38,7 +41,6 @@
 		submitWriteFormDone = true;
 	}
 </script>
-
 
 <div class="write-form-box con">
 	<form action="doWrite" method="POST" class="write-form form1"
@@ -73,9 +75,9 @@
 			</div>
 		</div>
 		<div class="form-row">
-			<div class="label">전송</div>
+			<div class="label">작성</div>
 			<div class="input">
-				<input type="submit" value="전송" /> <a href="list">취소</a>
+				<input type="submit" value="작성" /> <a href="list">취소</a>
 			</div>
 		</div>
 	</form>
