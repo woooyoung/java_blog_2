@@ -38,7 +38,7 @@
 <%="<style>.form1 .form-row:not(:first-child) { margin-top : 10px; }</style>"%>
 
 
-<title>장희성 블로그</title>
+<title>장희성 블로그 - ${pageTitle}</title>
 <script>
 	var loginedMemberId = parseInt("${loginedMemberId}");
 	var isLogined = "${isLogined}" == "true";
@@ -164,3 +164,6 @@
 	<c:if test="${isLogined}">
 		<div class="con">${loginedMember.name}번회원님환영합니다.</div>
 	</c:if>
+	<div class="con page-title">
+		<h1>${pageTitle}</h1>
+	</div>
