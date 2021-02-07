@@ -41,7 +41,7 @@ updateDate = NOW(),
 cateItemId = 6,
 displayStatus = 1,
 title = '블로그를 시작합니다.',
-`body` = ''
+`body` = '';
 
 # 회원 테이블 생성
 DROP TABLE IF EXISTS `member`;
@@ -77,8 +77,6 @@ ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER cateItem
 # 기존 게시물의 작성자 번호를 1번으로 정리(통일)
 UPDATE article
 SET memberId = 1
-WHERE memberId = 0; 
-
 WHERE memberId = 0;
 
 # 2번글 생성
@@ -115,4 +113,15 @@ title = '제목, 블로그 글 4, cateItemId 3',
 var a = 10;
 </script>
 ```
-'; 
+';
+
+# 댓글 테이블 추가
+DROP TABLE IF EXISTS articleReply;
+CREATE TABLE articleReply (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    memberId INT(10) UNSIGNED NOT NULL,
+    displayStatus TINYINT(1) UNSIGNED NOT NULL,
+    `body` TEXT NOT NULL
+);

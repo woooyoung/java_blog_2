@@ -56,6 +56,7 @@ public abstract class Controller {
 		req.setAttribute("loginedMemberId", loginedMemberId);
 		req.setAttribute("loginedMember", loginedMember);
 		req.setAttribute("isLogined", isLogined);
+
 		// 현재 URL
 
 		String currentUrl = req.getRequestURI();
@@ -70,6 +71,7 @@ public abstract class Controller {
 		req.setAttribute("currentUrl", currentUrl);
 		req.setAttribute("urlEncodedCurrentUrl", urlEncodedCurrentUrl);
 		req.setAttribute("urlEncodedAfterLoginRedirectUrl", urlEncodedCurrentUrl);
+		req.setAttribute("noBaseCurrentUri", req.getRequestURI().replace(req.getContextPath(), ""));
 
 		// 로그인 페이지에서 로그인 페이지로 이동하는 버튼을 또 누른 경우
 		// 기존 afterLoginRedirectUrl 정보를 유지시키기 위한 로직
@@ -94,6 +96,7 @@ public abstract class Controller {
 		if (doGuardRs != null) {
 			return doGuardRs;
 		}
+
 		String rs = doAction();
 		afterAction();
 
