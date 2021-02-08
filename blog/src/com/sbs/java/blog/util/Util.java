@@ -96,6 +96,6 @@ public class Util {
 	}
 
 	public static boolean isSuccess(Map<String, Object> rs) {
-		return ((String) rs.get("resultCode")).startsWith("S-1");
+		return ((String) rs.get("resultCode")).startsWith("S-");
 	}
 }
