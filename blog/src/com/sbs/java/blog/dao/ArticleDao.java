@@ -180,4 +180,27 @@ public class ArticleDao extends Dao {
 
 		return articleReplies;
 	}
+
+	public ArticleReply getArticleReply(int id) {
+		SecSql sql = new SecSql();
+
+		sql.append("SELECT *");
+		sql.append("FROM articleReply");
+		sql.append("WHERE id = ?", id);
+
+		Map<String, Object> row = DBUtil.selectRow(dbConn, sql);
+
+		if (row.isEmpty()) {
+			return null;
+		}
+
+		return new ArticleReply(row);
+	}
+
+	public int deleteArticleReply(int id) {
+		SecSql sql = SecSql.from("DELETE FROM articleReply");
+		sql.append("WHERE id = ?", id);
+
+		return DBUtil.delete(dbConn, sql);
+	}
 }
