@@ -4,7 +4,6 @@ import java.sql.Connection;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.sbs.java.blog.util.Util;
 
@@ -25,7 +24,7 @@ public class MemberController extends Controller {
 			return doActionLogin();
 		case "doLogin":
 			return doActionDoLogin();
-		case "doActionDoLogout":
+		case "doLogout":
 			return doActionDoLogout();
 		}
 
@@ -42,12 +41,11 @@ public class MemberController extends Controller {
 			return String.format("html:<script> alert('일치하는 정보가 없습니다.'); history.back(); </script>");
 		}
 
-		HttpSession session = req.getSession();
 		session.setAttribute("loginedMemberId", loginedMemberId);
 
-		String redirectUrl = Util.getString(req, "redirectUrl", "../home/main");
+		String redirectUri = Util.getString(req, "redirectUri", "../home/main");
 
-		return String.format("html:<script> alert('로그인 되었습니다.'); location.replace('" + redirectUrl + "'); </script>");
+		return String.format("html:<script> alert('로그인 되었습니다.'); location.replace('" + redirectUri + "'); </script>");
 	}
 
 	private String doActionLogin() {
@@ -57,9 +55,9 @@ public class MemberController extends Controller {
 	private String doActionDoLogout() {
 		session.removeAttribute("loginedMemberId");
 
-		String redirectUrl = Util.getString(req, "redirectUrl", "../home/main");
+		String redirectUri = Util.getString(req, "redirectUri", "../home/main");
 
-		return String.format("html:<script> alert('로그아웃 되었습니다.'); location.replace('" + redirectUrl + "'); </script>");
+		return String.format("html:<script> alert('로그아웃 되었습니다.'); location.replace('" + redirectUri + "'); </script>");
 	}
 
 	private String doActionDoJoin() {
