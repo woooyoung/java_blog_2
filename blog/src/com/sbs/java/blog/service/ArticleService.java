@@ -1,4 +1,3 @@
-
 package com.sbs.java.blog.service;
 
 import java.sql.Connection;
@@ -52,13 +51,19 @@ public class ArticleService extends Service {
 		return getReplyCheckRsDeleteAvailable(articleReply, actorId);
 	}
 
+	public Map<String, Object> getReplyCheckRsModifyAvailable(int id, int actorId) {
+		ArticleReply articleReply = getArticleReply(id);
+
+		return getReplyCheckRsModifyAvailable(articleReply, actorId);
+	}
+
 	public Map<String, Object> getReplyCheckRsDeleteAvailable(int id, int actorId) {
 		ArticleReply articleReply = this.getArticleReply(id);
 
 		return getReplyCheckRsDeleteAvailable(articleReply, actorId);
 	}
 
-	private ArticleReply getArticleReply(int id) {
+	public ArticleReply getArticleReply(int id) {
 		return articleDao.getArticleReply(id);
 	}
 
@@ -174,6 +179,10 @@ public class ArticleService extends Service {
 
 	public int deleteArticleReply(int id) {
 		return articleDao.deleteArticleReply(id);
+	}
+
+	public int modifyArticleReply(int id, String body) {
+		return articleDao.modifyArticleReply(id, body);
 	}
 
 }
