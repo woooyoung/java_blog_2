@@ -7,17 +7,12 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.Session;
-import org.apache.tomcat.websocket.Authenticator;
-
-import com.mysql.cj.protocol.Message;
-import com.sun.jdi.connect.Transport;
+import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 
 import sun.jvm.hotspot.debugger.AddressException;
 
