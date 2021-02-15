@@ -1,7 +1,7 @@
 package com.sbs.java.blog.util;
 
-import javax.mail.Authenticator;
-import javax.mail.PasswordAuthentication;
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
 
 public class MailAuth extends Authenticator {
 
