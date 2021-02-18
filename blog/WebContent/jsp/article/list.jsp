@@ -46,9 +46,11 @@
 	text-decoration: underline;
 	color: #787878;
 }
+
 .page-box>ul>li:hover>a {
 	color: black;
 }
+
 .page-box>ul>li.current>a {
 	color: red;
 }
@@ -62,6 +64,7 @@
 			<col width="100">
 			<col width="200">
 			<col width="120">
+			<col width="120">
 			<col>
 			<col width="120">
 		</colgroup>
@@ -69,6 +72,7 @@
 			<tr>
 				<th>번호</th>
 				<th>날짜</th>
+				<th>작성자</th>
 				<th>카테고리 아이템</th>
 				<th>제목</th>
 				<th>비고</th>
@@ -80,6 +84,7 @@
 					<td class="text-align-center"><a
 						href="./detail?id=${article.id}">${article.id}</a></td>
 					<td class="text-align-center">${article.regDate}</td>
+					<td class="text-align-center">${article.extra.writer}</td>
 					<td class="text-align-center">${article.cateItemId}</td>
 					<td><a href="./detail?id=${article.id}">${article.title}</a></td>
 					<td><c:if test="${article.extra.deleteAvailable}">
@@ -97,9 +102,9 @@
 <div class="con page-box">
 	<ul class="flex flex-jc-c">
 		<c:forEach var="i" begin="1" end="${totalPage}" step="1">
-		<li class="${i == cPage ? 'current' : ''}"><a
-			href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=${i}"
-			class="block">${i}</a></li>
+			<li class="${i == cPage ? 'current' : ''}"><a
+				href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=${i}"
+				class="block">${i}</a></li>
 		</c:forEach>
 	</ul>
 </div>
