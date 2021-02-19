@@ -1,3 +1,4 @@
+
 package com.sbs.java.blog.dao;
 
 import java.sql.Connection;
@@ -64,5 +65,13 @@ public class MemberDao extends Dao {
 		sql.append("WHERE id = ?", id);
 
 		return new Member(DBUtil.selectRow(dbConn, sql));
+	}
+
+	public void modify(int actorId, String loginPw) {
+		SecSql sql = SecSql.from("UPDATE member");
+		sql.append("SET updateDate = NOW()");
+		sql.append(", loginPw = ?", loginPw);
+		sql.append("WHERE id = ?", actorId);
+		DBUtil.update(dbConn, sql);
 	}
 }

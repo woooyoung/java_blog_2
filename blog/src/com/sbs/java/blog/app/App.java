@@ -55,6 +55,7 @@ public class App {
 		if (req.getServletContext().getInitParameter("gmailPw") != null) {
 			Config.gmailPw = (String) req.getServletContext().getInitParameter("gmailPw");
 		}
+
 		// DB 드라이버 로딩
 		loadDbDriver();
 
@@ -126,6 +127,9 @@ public class App {
 				String viewPath = "/jsp/" + actionResult;
 				req.getRequestDispatcher(viewPath).forward(req, resp);
 			} else if (actionResult.startsWith("html:")) {
+				resp.getWriter().append(actionResult.substring(5));
+			} else if (actionResult.startsWith("json:")) {
+				resp.setContentType("application/json");
 				resp.getWriter().append(actionResult.substring(5));
 			} else {
 				resp.getWriter().append("처리할 수 없는 액션결과입니다.");
